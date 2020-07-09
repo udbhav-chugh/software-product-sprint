@@ -1,18 +1,150 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
-  </body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Udbhav's Portfolio</title>
+        <link rel="icon" href="images/icon.jpeg" />
+        <!-- fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap and CSS -->
+        <link href="style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body id="page-top">
+        <!-- Navigation Bar-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars ml-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ml-auto">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#aboutme">About Me</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#journey">Journey</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Title of Portfolio-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-heading text-uppercase">UDBHAV CHUGH</div>
+                <div class="masthead-subheading">Technology enthusiast making my way into the coding world...</div>
+                <a class="btn btn-warning text-uppercase js-scroll-trigger" href="#aboutme">Know More</a>
+            </div>
+        </header>
+        <!-- About Me-->
+        <section class="page-section" id="aboutme">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">About Me</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-muted">I am currently pursuing B.Tech. in computer science from the Indian Institute of Technology, Guwahati. Over the years, I persevered hard to build upon my skills to become a well-rounded developer. I have done various guided and hobby projects to explore full stack development, software development, machine learning, and systems.</p>
+                        <p class="text-muted">
+                        I love solving challenges and finding optimized solutions. I spend most of my free time in competitive programming on platforms like Codeforces and Codechef and participating in various sport programming competitions. </p>
+                        <p class="text-muted">
+                        I also have to my credit, various recognitions such as being the department topper of Computer Science batch of 2021, an ICPC regional qualifier with the second-best rank in IIT Guwahati and a national finalist in the Smart Indian Hackathon 2020.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="images/about/udbhav.png" alt="" /></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects - to be added -->
+        <section class="page-section bg-light" id="projects">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Projects</h2>
+                    <h3 class="section-subheading text-muted">To be added</h3>
+                </div>
+            </div>
+        </section>
+        <section class="page-section" id="journey">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Journey</h2>
+                    <h3 class="section-subheading text-muted">An overview of my technical journey.</h3>
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="images/journey/google.png" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>July 2020 - August 2020</h4>
+                                <h4 class="subheading">Software Product Sprint</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Part of an 8-week learning program by Google to provide a practical experience in collaborative, project-based web development while also connecting to a community of like-minded peers.</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="images/journey/nutanix.jpg" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>April 2020 - June 2020</h4>
+                                <h4 class="subheading">Software Engineering Intern</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Developed a stateless model to monitor configuration changes in virtual networking resources distributed over multiple node clusters.</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="images/journey/health_ai.jpeg" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>May 2019 - July 2019</h4>
+                                <h4 class="subheading">Software Engineering Intern</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Designed an object detection and classification model (using transfer learning on CNN models) for screening breast cancer from radiological images.</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="images/journey/iitg.png" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>July 2017 - May 2021</h4>
+                                <h4 class="subheading">B.Tech in Computer Science</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Current CPI: 9.89/10<br>Competetive Programming Mentor, Coding Club, 2018<br>Alumni Representative, CSE Association, 2018-19</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="images/journey/dpsrkp.png" alt="" /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Arpil 2013 - March 2017</h4>
+                                <h4 class="subheading">Secondary and Senior Secondary</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Class XII Percentage: 97.8%<br>Class X CGPA: 10<br>Academic Head, Physics Society</p></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Interests - to be added -->
+        <section class="page-section bg-light" id="interests">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Interests</h2>
+                    <h3 class="section-subheading text-muted">To be added</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bootstrap JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!--Self JS-->
+        <script src="script.js"></script>
+    </body>
 </html>
