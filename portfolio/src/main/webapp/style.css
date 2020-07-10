@@ -143,6 +143,94 @@ header.masthead .masthead-heading {
   }
 }
 
+/*css for projects*/
+#project .project-item {
+  max-width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+#project .project-item .project-link {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+#project .project-item .project-link .project-hover {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(254, 209, 54, 0.9);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity ease-in-out 0.25s;
+}
+#project .project-item .project-link .project-hover .project-hover-content {
+  font-size: 1.25rem;
+  color: white;
+}
+#project .project-item .project-link:hover .project-hover {
+  opacity: 1;
+}
+#project .project-item .project-caption {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #fff;
+}
+#project .project-item .project-caption .project-caption-heading {
+  font-size: 1.5rem;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-weight: 700;
+  margin-bottom: 0;
+}
+#project .project-item .project-caption .project-caption-subheading {
+  font-style: italic;
+  font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.project-modal .modal-dialog {
+  /*margin: 1rem;*/
+  max-width: 50em;
+  position: relative;
+  margin: 0 auto;
+  top: 10%;
+}
+.project-modal .modal-content {
+  padding-top: 6rem;
+  padding-bottom: 1rem;
+  /*text-align: center;*/
+}
+.project-modal .modal-content h2 {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+.project-modal .modal-content p.item-intro {
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-family: "Droid Serif", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+.project-modal .modal-content p {
+  margin-bottom: 2rem;
+}
+.project-modal .modal-content ul.list-inline {
+  margin-bottom: 2rem;
+}
+.project-modal .modal-content img {
+  margin-bottom: 2rem;
+}
+.project-modal .close-modal {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+.project-modal .close-modal:hover {
+  opacity: 0.3;
+}
+
 /*css for journey timeline*/
 
 .timeline {
