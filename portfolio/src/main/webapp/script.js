@@ -65,7 +65,48 @@
 })(jQuery); // End of use strict
 
 function getRandomComment() {
-  fetch('/data').then(response => response.text()).then((comment) => {
-    document.getElementById('comment-container').innerText = comment;
+  fetch('/data').then(response => response.json()).then((comments) => {
+    var commentsContainer = document.getElementById('comments-container');
+
+    /*Structure of each comment implemented in the for loop below:
+    <div class="commentbackground">
+        <blockquote class="blockquote mb-0">
+            <p>Comment</p>
+            <footer class="blockquote-footer">Author, <i>Organization</i></footer>
+        </blockquote>
+    </div>
+	<br>
+    */
+
+    for(var i = 0; i < comments.length; i++){
+        var commentPara = document.createElement("p");
+        var commentText = document.createTextNode(comments[i].Comment);
+        commentPara.appendChild(commentText);
+
+        var authorText = document.createTextNode(comments[i].Author + ", ");
+        var organizationText = document.createTextNode(comments[i].Organization);
+        var italicsOrganizationText = document.createElement("i");
+        italicsOrganizationText.appendChild(organizationText);
+
+        var commentFooter = document.createElement("footer");
+        commentFooter.className = "blockquote-footer";
+        commentFooter.appendChild(authorText);
+        commentFooter.appendChild(italicsOrganizationText);
+
+        var blockQuote = document.createElement("blockquote");
+        blockQuote.className = "blockquote mb-0";
+        blockQuote.appendChild(commentPara);
+        blockQuote.appendChild(commentFooter);
+
+        var commentDiv = document.createElement("div");
+        commentDiv.className = "commentbackground";
+        commentDiv.appendChild(blockQuote);
+
+        var lineBreak = document.createElement("br");
+
+        commentsContainer.appendChild(commentDiv);
+        commentsContainer.appendChild(lineBreak);
+    }
+
   });
 }

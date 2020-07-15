@@ -13,10 +13,11 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
-
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,21 +27,45 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> comments;
+  private List< HashMap<String, String> > comments;
 
   @Override
   public void init() {
     comments = new ArrayList<>();
-    comments.add("Commet 1, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
-    comments.add("Commet 2, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
-    comments.add("Commet 3, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
+
+    //Each comment map contains comment, author and Organization.
+    HashMap<String, String> firstComment = new HashMap<String, String>();
+    firstComment.put("Comment", "Commet 1, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
+    firstComment.put("Author", "Author 1");
+    firstComment.put("Organization", "Organization 1");
+    comments.add(firstComment);
+
+    HashMap<String, String> secondComment = new HashMap<String, String>();
+    secondComment.put("Comment", "Commet 2, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
+    secondComment.put("Author", "Author 2");
+    secondComment.put("Organization", "Organization 2");
+    comments.add(secondComment);
+
+    HashMap<String, String> thirdComment = new HashMap<String, String>();
+    thirdComment.put("Comment", "Commet 3, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
+    thirdComment.put("Author", "Author 3");
+    thirdComment.put("Organization", "Organization 3");
+    comments.add(thirdComment);
+
     }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = comments.get((int) (Math.random() * comments.size()));
-
-    response.setContentType("text/html;");
-    response.getWriter().println(comment);
+    String json = convertToJson();
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
   }
+
+  //Converts a list of HashMap<String,String> instance into a JSON string using the Gson library.
+  private String convertToJson() {
+    Gson gson = new Gson();
+    String json = gson.toJson(comments);
+    return json;
+  }
+
 }
