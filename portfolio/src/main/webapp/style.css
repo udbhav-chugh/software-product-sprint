@@ -373,3 +373,13 @@ header.masthead .masthead-heading {
     margin-left: -45vw;
     margin-right: 45vw;
 }
+
+/*comment background css*/
+.commentbackground {
+	border-radius: 25px;
+    border: 2px solid #c99912;
+	padding: 20px; 
+ 	background: url("images/comments/ancientPage.jpg");
+	background-position: left top;
+	background-repeat: repeat;
+}

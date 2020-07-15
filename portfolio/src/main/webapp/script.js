@@ -63,3 +63,9 @@
     // Collapse the navbar when page is scrolled
     $(window).scroll(navbarCollapse);
 })(jQuery); // End of use strict
+
+function getRandomComment() {
+  fetch('/data').then(response => response.text()).then((comment) => {
+    document.getElementById('comment-container').innerText = comment;
+  });
+}
