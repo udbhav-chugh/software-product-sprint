@@ -64,44 +64,58 @@
     $(window).scroll(navbarCollapse);
 })(jQuery); // End of use strict
 
-function getRandomComment() {
+/*Structure of each comment implemented in the for loop below:
+<div class="commentbackground">
+    <blockquote class="blockquote mb-0">
+        <p>Comment</p>
+        <footer class="blockquote-footer">Author, <i>Organization</i></footer>
+    </blockquote>
+</div>
+<br>
+*/
+
+function getCommentPara(comment){
+    var commentPara = document.createElement("p");
+    var commentText = document.createTextNode(comment.comment);
+    commentPara.appendChild(commentText);
+    return commentPara;
+}
+
+function getCommentFooter(comment){
+    var authorText = document.createTextNode(comment.author + ", ");
+    var organizationText = document.createTextNode(comment.organization);
+    var italicsOrganizationText = document.createElement("i");
+    italicsOrganizationText.appendChild(organizationText);
+
+    var commentFooter = document.createElement("footer");
+    commentFooter.className = "blockquote-footer";
+    commentFooter.appendChild(authorText);
+    commentFooter.appendChild(italicsOrganizationText);
+    return commentFooter;
+}
+
+function getCommentData(comment){
+    var blockQuote = document.createElement("blockquote");
+    blockQuote.className = "blockquote mb-0";
+    blockQuote.appendChild(getCommentPara(comment));
+    blockQuote.appendChild(getCommentFooter(comment));
+    return blockQuote;
+}
+
+function getCommentDiv(comment){
+    var commentDiv = document.createElement("div");
+    commentDiv.className = "commentbackground";
+    commentDiv.appendChild(getCommentData(comment));    
+    return commentDiv;
+}
+
+function addCommentsToPortfolio() {
+
   fetch('/data').then(response => response.json()).then((comments) => {
+
     var commentsContainer = document.getElementById('comments-container');
-
-    /*Structure of each comment implemented in the for loop below:
-    <div class="commentbackground">
-        <blockquote class="blockquote mb-0">
-            <p>Comment</p>
-            <footer class="blockquote-footer">Author, <i>Organization</i></footer>
-        </blockquote>
-    </div>
-	<br>
-    */
-
     for(var i = 0; i < comments.length; i++){
-        var commentPara = document.createElement("p");
-        var commentText = document.createTextNode(comments[i].Comment);
-        commentPara.appendChild(commentText);
-
-        var authorText = document.createTextNode(comments[i].Author + ", ");
-        var organizationText = document.createTextNode(comments[i].Organization);
-        var italicsOrganizationText = document.createElement("i");
-        italicsOrganizationText.appendChild(organizationText);
-
-        var commentFooter = document.createElement("footer");
-        commentFooter.className = "blockquote-footer";
-        commentFooter.appendChild(authorText);
-        commentFooter.appendChild(italicsOrganizationText);
-
-        var blockQuote = document.createElement("blockquote");
-        blockQuote.className = "blockquote mb-0";
-        blockQuote.appendChild(commentPara);
-        blockQuote.appendChild(commentFooter);
-
-        var commentDiv = document.createElement("div");
-        commentDiv.className = "commentbackground";
-        commentDiv.appendChild(blockQuote);
-
+        var commentDiv = getCommentDiv(comments[i]);
         var lineBreak = document.createElement("br");
 
         commentsContainer.appendChild(commentDiv);

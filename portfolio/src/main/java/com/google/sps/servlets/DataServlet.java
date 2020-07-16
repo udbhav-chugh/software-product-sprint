@@ -23,46 +23,61 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//POJO for Comment.
+class Comment{
+    String comment;
+    String author;
+    String organization;
+
+    public Comment(String comment, String author, String organization){
+        this.comment = comment;
+        this.author = author;
+        this.organization = organization;
+    }
+    public String getComment(){
+        return this.comment;
+    }
+    public String getAuthor(){
+        return this.author;
+    }
+    public String getOrganization(){
+        return this.organization;
+    }
+}
+
 /** Servlet that returns a comment */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List< HashMap<String, String> > comments;
+  private List< Comment > comments;
 
-  @Override
-  public void init() {
+  public void getComments(){
     comments = new ArrayList<>();
-
     //Each comment map contains comment, author and Organization.
-    HashMap<String, String> firstComment = new HashMap<String, String>();
-    firstComment.put("Comment", "Commet 1, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
-    firstComment.put("Author", "Author 1");
-    firstComment.put("Organization", "Organization 1");
+    Comment firstComment = new Comment("Comment 1, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.", "Author 1", "Organization 1" );
     comments.add(firstComment);
 
-    HashMap<String, String> secondComment = new HashMap<String, String>();
-    secondComment.put("Comment", "Commet 2, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
-    secondComment.put("Author", "Author 2");
-    secondComment.put("Organization", "Organization 2");
+    Comment secondComment = new Comment("Comment 2, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.", "Author 2", "Organization 2");
     comments.add(secondComment);
 
-    HashMap<String, String> thirdComment = new HashMap<String, String>();
-    thirdComment.put("Comment", "Commet 3, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.");
-    thirdComment.put("Author", "Author 3");
-    thirdComment.put("Organization", "Organization 3");
+    Comment thirdComment = new Comment("Comment 3, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.", "Author 1", "Organization 1");
     comments.add(thirdComment);
 
+  }
+  @Override
+  public void init() {
+      getComments();
     }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String json = convertToJson();
+    String json = convertToJson(comments);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
-  //Converts a list of HashMap<String,String> instance into a JSON string using the Gson library.
-  private String convertToJson() {
+  //Converts a list of Comment instance into a JSON string using the Gson library.
+  private String convertToJson(List< Comment > comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
