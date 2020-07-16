@@ -13,62 +13,29 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+
+import com.google.sps.data.Comment;
 import com.google.gson.Gson;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashMap;
+import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//POJO for Comment.
-class Comment{
-    String comment;
-    String author;
-    String organization;
 
-    public Comment(String comment, String author, String organization){
-        this.comment = comment;
-        this.author = author;
-        this.organization = organization;
-    }
-    public String getComment(){
-        return this.comment;
-    }
-    public String getAuthor(){
-        return this.author;
-    }
-    public String getOrganization(){
-        return this.organization;
-    }
-}
-
-/** Servlet that returns a comment */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   private List< Comment > comments;
-
-  public void getComments(){
-    comments = new ArrayList<>();
-    //Each comment map contains comment, author and Organization.
-    Comment firstComment = new Comment("Comment 1, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.", "Author 1", "Organization 1" );
-    comments.add(firstComment);
-
-    Comment secondComment = new Comment("Comment 2, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.", "Author 2", "Organization 2");
-    comments.add(secondComment);
-
-    Comment thirdComment = new Comment("Comment 3, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at sodales tellus, nec scelerisque felis. Nam id lobortis leo. Praesent molestie neque a lacus vehicula iaculis. Curabitur pulvinar augue vel lacus vulputate, sit amet euismod turpis malesuada. Mauris cursus rhoncus mauris, sed tristique purus semper in.", "Author 1", "Organization 1");
-    comments.add(thirdComment);
-
-  }
+  
   @Override
   public void init() {
-      getComments();
-    }
+    comments = new ArrayList<>();
+  }
 
+  /* get function that returns the comments in JSON format */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String json = convertToJson(comments);
@@ -76,11 +43,24 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-  //Converts a list of Comment instance into a JSON string using the Gson library.
+  /*Converts a list of Comment instance into a JSON string using the Gson library.*/
   private String convertToJson(List< Comment > comments) {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
+  }
+
+  /*post function to read input of the form and add the comment to List of Comment objects*/
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    // Get the input from the form.
+    String comment = request.getParameter("comment");
+    String author = request.getParameter("author");
+    String organization = request.getParameter("organization");
+    Comment newComment = new Comment(comment, author, organization);
+    comments.add(newComment);
+    response.sendRedirect("/index.html#comments");
   }
 
 }
