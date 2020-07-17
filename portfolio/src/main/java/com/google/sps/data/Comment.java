@@ -14,23 +14,16 @@
 
 package com.google.sps.data;
 
-public class Comment{
-    private String comment;
-    private String author;
-    private String organization;
+public final class Comment{
+    private final String comment;
+    private final String author;
+    private final String organization;
+    private final long timestamp;
 
-    public Comment(String comment, String author, String organization){
+    public Comment(String comment, String author, String organization, long timestamp){
         this.comment = comment;
         this.author = author;
         this.organization = organization;
-    }
-    public String getComment(){
-        return this.comment;
-    }
-    public String getAuthor(){
-        return this.author;
-    }
-    public String getOrganization(){
-        return this.organization;
+        this.timestamp = timestamp;
     }
 }

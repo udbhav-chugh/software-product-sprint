@@ -14,6 +14,12 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.sps.data.Comment;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -25,19 +31,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
-
-  private List< Comment > comments;
-  
-  @Override
-  public void init() {
-    comments = new ArrayList<>();
-  }
+@WebServlet("/data-get")
+public class DataGetServlet extends HttpServlet {
 
   /* get function that returns the comments in JSON format */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Comment> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      String comment = (String) entity.getProperty("comment");
+      String author = (String) entity.getProperty("author");
+      String organization = (String) entity.getProperty("organization");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      Comment finalComment = new Comment(comment, author, organization, timestamp);
+      comments.add(finalComment);
+    }
     String json = convertToJson(comments);
     response.setContentType("application/json;");
     response.getWriter().println(json);
@@ -48,19 +62,6 @@ public class DataServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
-  }
-
-  /*post function to read input of the form and add the comment to List of Comment objects*/
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-    // Get the input from the form.
-    String comment = request.getParameter("comment");
-    String author = request.getParameter("author");
-    String organization = request.getParameter("organization");
-    Comment newComment = new Comment(comment, author, organization);
-    comments.add(newComment);
-    response.sendRedirect("/index.html#comments");
   }
 
 }
