@@ -13,6 +13,8 @@
         <!-- Bootstrap and CSS -->
         <link href="style.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     </head>
     <body id="page-top" onload="addCommentsToPortfolio()">
         <!-- Navigation Bar-->
@@ -67,7 +69,8 @@
         </section>
 
         <!-- Journey -->
-        <section class="page-section bg-light" id="journey">
+        <section class="page-section" id="journey">
+            <div class="bglight">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Journey</h2>
@@ -125,6 +128,7 @@
                         </div>
                     </li>
                 </ul>
+            </div>
             </div>
         </section>
 
@@ -515,7 +519,8 @@
         </div>
 
         <!-- Achievements-->
-        <section class="page-section bg-light" id="achievements">
+        <section class="page-section" id="achievements">
+            <div class="bglight">
             <div class="container">
             	<div class="well full-width">
                 <div class="text-center">
@@ -549,6 +554,7 @@
                     </div>
                 </div>
             	</div>
+            </div>
             </div>
         </section>
 
@@ -666,18 +672,57 @@
         </section>
 
         <!-- Comments Section -->
-        <section class="page-section bg-light" id="comments">
+        <section class="page-section" id="comments">
+            <div class="bglight">
         	<div class="container">
             	<div class="well full-width">
 	                <div class="text-center">
 	                    <h2 class="section-heading text-uppercase">Comments</h2>
 	                    <h3 class="section-subheading text-muted">Feel free to drop a comment.</h3>
 	                </div>
+                    <div class="text-center">
+                        <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#commentForm">Add Comment</a>
+                    </div>
                     <div id="comments-container">
 	                	<!-- Javascript appends comments here -->
                     </div>
             	</div>
+                <div class="modal fade" id="commentForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Add Comment</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        <!--Form to take comment input-->
+                            <form action = "/data" method = "POST" id="comment-form">
+                                <div class="modal-body mx-3">
+                                    <div class="md-form mb-5">
+                                        <i class="fas fa-address-book prefix grey-text"></i>
+                                        <input type="text" name= "author" id="author" class="form-control validate" required>
+                                        <label data-error="wrong" data-success="right" for="author">Your Name</label>
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fas fa-building prefix grey-text"></i>
+                                        <input type="text" name= "organization" id="organization" class="form-control validate" required>
+                                        <label data-error="wrong" data-success="right" for="organization">Organization</label>
+                                    </div>
+                                    <div class="md-form mb-5">
+                                        <i class="fas fa-comment-dots prefix grey-text"></i>
+                                        <textarea type="text" name= "comment" id="comment" class="form-control validate" required></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button class="btn btn-default" type="submit" form="comment-form" value="Submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
            	</div>
+            </div>
         </section>
 
         <footer class="footer py-4">
@@ -693,6 +738,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
         <!--Self JS-->
         <script src="script.js"></script>
     </body>
