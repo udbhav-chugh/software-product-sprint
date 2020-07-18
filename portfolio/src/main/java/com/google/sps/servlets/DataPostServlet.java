@@ -34,6 +34,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data-post")
 public class DataPostServlet extends HttpServlet {
 
+  private static DatastoreService datastore;
+  @Override
+  public void init(){
+      datastore = DatastoreServiceFactory.getDatastoreService();
+  }
+
   /*post function to read input of the form and add the comment to the database*/
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -50,7 +56,6 @@ public class DataPostServlet extends HttpServlet {
     taskEntity.setProperty("organization", organization);
     taskEntity.setProperty("timestamp", timestamp);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(taskEntity);
 
     response.sendRedirect("/index.html#comments");

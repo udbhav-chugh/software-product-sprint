@@ -34,14 +34,18 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data-get")
 public class DataGetServlet extends HttpServlet {
 
+  private static DatastoreService datastore;
+  private static Query query;
+  @Override
+  public void init(){
+      datastore = DatastoreServiceFactory.getDatastoreService();
+      query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+  }
   /* get function that returns the comments in JSON format */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String comment = (String) entity.getProperty("comment");
