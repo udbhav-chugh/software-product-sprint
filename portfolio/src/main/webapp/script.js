@@ -111,7 +111,7 @@ function getCommentDiv(comment){
 
 function addCommentsToPortfolio() {
 
-  fetch('/data').then(response => response.json()).then((comments) => {
+  fetch('/data-get').then(response => response.json()).then((comments) => {
 
     var commentsContainer = document.getElementById('comments-container');
     for(var i = 0; i < comments.length; i++){
