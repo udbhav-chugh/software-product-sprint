@@ -38,8 +38,8 @@ public class DataGetServlet extends HttpServlet {
   private static Query query;
   @Override
   public void init(){
-      datastore = DatastoreServiceFactory.getDatastoreService();
-      query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    datastore = DatastoreServiceFactory.getDatastoreService();
+    query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
   }
   /* get function that returns the comments in JSON format */
   @Override
@@ -52,8 +52,9 @@ public class DataGetServlet extends HttpServlet {
       String author = (String) entity.getProperty("author");
       String organization = (String) entity.getProperty("organization");
       long timestamp = (long) entity.getProperty("timestamp");
+      String imageUrl = (String) entity.getProperty("imageUrl");
 
-      Comment finalComment = new Comment(comment, author, organization, timestamp);
+      Comment finalComment = new Comment(comment, author, organization, timestamp, imageUrl);
       comments.add(finalComment);
     }
     String json = convertToJson(comments);
