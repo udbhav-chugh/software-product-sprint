@@ -46,11 +46,12 @@ public class DataPostServlet extends HttpServlet {
 
   private static DatastoreService datastore;
   private static BlobstoreService blobstoreService;
+  private static ImagesService imagesService;
   @Override
   public void init(){
     datastore = DatastoreServiceFactory.getDatastoreService();
     blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
-
+    imagesService = ImagesServiceFactory.getImagesService();
   }
 
   /*post function to read input of the form and add the comment to the database*/
@@ -96,8 +97,6 @@ public class DataPostServlet extends HttpServlet {
         return null;
     }
 
-    // Use ImagesService to get a URL that points to the uploaded file.
-    ImagesService imagesService = ImagesServiceFactory.getImagesService();
     ServingUrlOptions options = ServingUrlOptions.Builder.withBlobKey(blobKey);
     String url = imagesService.getServingUrl(options);
 
