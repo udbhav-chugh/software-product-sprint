@@ -98,6 +98,11 @@ function getCommentData(comment){
     var blockQuote = document.createElement("blockquote");
     blockQuote.className = "blockquote mb-0";
     blockQuote.appendChild(getCommentPara(comment));
+    if(comment.imageUrl){
+        var img = document.createElement("img"); 
+        img.src =  comment.imageUrl;
+        blockQuote.appendChild(img);
+    }
     blockQuote.appendChild(getCommentFooter(comment));
     return blockQuote;
 }
@@ -123,4 +128,15 @@ function addCommentsToPortfolio() {
     }
 
   });
+}
+
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload-url')
+      .then((response) => {
+        return response.text();
+      })
+      .then((uploadUrl) => {
+        const messageForm = document.getElementById('comment-form');
+        messageForm.action = uploadUrl;
+      });
 }

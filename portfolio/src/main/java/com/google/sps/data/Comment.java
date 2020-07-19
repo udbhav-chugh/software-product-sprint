@@ -19,11 +19,13 @@ public final class Comment{
     private final String author;
     private final String organization;
     private final long timestamp;
+    private final String imageUrl;
 
-    public Comment(String comment, String author, String organization, long timestamp){
+    public Comment(String comment, String author, String organization, long timestamp, String imageUrl){
         this.comment = comment;
         this.author = author;
         this.organization = organization;
         this.timestamp = timestamp;
+        this.imageUrl = imageUrl;
     }
 }
